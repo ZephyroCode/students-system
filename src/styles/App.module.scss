@@ -1,0 +1,12 @@
+@import './abstracts/variables.scss';
+
+.title {
+	text-align: center;
+	font-size: 1.75rem;
+	color: $pink;
+}
+
+.text {
+	text-align: center;
+	color: $blue;
+}
