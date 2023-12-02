@@ -2,7 +2,7 @@
 	"name": "students-system",
 	"description": "Students System, university project",
 	"private": true,
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"type": "module",
 	"keywords": [
 		"react",

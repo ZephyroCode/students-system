@@ -1,0 +1,14 @@
+@import '../../styles/abstracts/variables.scss';
+
+.option {
+	padding: 0.5rem;
+	border-radius: $borderRadius;
+	color: $celeste;
+	border: 2px solid $blue;
+	cursor: pointer;
+	transition: $transition;
+
+	&:hover {
+		background-color: $purple;
+	}
+}

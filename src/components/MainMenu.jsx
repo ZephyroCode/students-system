@@ -1,17 +1,29 @@
-import styles from './MainMenu.module.scss';
+import Card from './pieces/Card';
+import CardTitle from './pieces/CardTitle';
+import MenuOption from './pieces/MenuOption';
 
 const MainMenu = () => {
 	return (
-		<main className={styles.card}>
-			<h2 className={styles.title}>Elige una opción</h2>
-			<div>
-				<p className={styles.option}>Cargar Estudiante</p>
-				<p className={styles.option}>Buscar Estudiante</p>
-				<p className={styles.option}>Modificar Estudiante</p>
-				<p className={styles.option}>Eliminar Estudiante</p>
-				<p className={styles.option}>Mostrar Estudiante</p>
-			</div>
-		</main>
+		<Card>
+			<CardTitle>Elige una opción</CardTitle>
+			<ul>
+				<li>
+					<MenuOption>Cargar Estudiante</MenuOption>
+				</li>
+				<li>
+					<MenuOption>Buscar Estudiante</MenuOption>
+				</li>
+				<li>
+					<MenuOption>Modificar Estudiante</MenuOption>
+				</li>
+				<li>
+					<MenuOption>Eliminar Estudiante</MenuOption>
+				</li>
+				<li>
+					<MenuOption>Mostrar Estudiantes</MenuOption>
+				</li>
+			</ul>
+		</Card>
 	);
 };
 

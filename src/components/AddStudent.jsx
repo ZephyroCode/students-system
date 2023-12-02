@@ -1,57 +1,47 @@
+import Card from './pieces/Card';
+import CardTitle from './pieces/CardTitle';
 import styles from './AddStudent.module.scss';
+import Button from './pieces/Button';
+import Label from './pieces/Label';
+import Input from './pieces/Input';
 
 const AddStudent = () => {
 	return (
-		<main className={styles.card}>
-			<h2 className={styles.title}>Cargar Estudiante</h2>
+		<Card>
+			<CardTitle>Cargar Estudiante</CardTitle>
 			<form>
-				<label className={styles.label} htmlFor='name'>
-					Nombre:{' '}
-				</label>
-				<input className={styles.input} type='text' id='name' />
-				<label className={styles.label} htmlFor='surname'>
-					Apellido:{' '}
-				</label>
-				<input className={styles.input} type='text' id='surname' />
-				<label className={styles.label} htmlFor='idnumber'>
-					Cédula:{' '}
-				</label>
-				<input className={styles.input} type='number' id='idnumber' />
-				<label className={styles.label} htmlFor='birthdate'>
-					Fecha de nacimiento:{' '}
-				</label>
-				<input className={styles.input} type='date' id='birthdate' />
-				<label className={styles.label} htmlFor='gender'>
-					Sexo:{' '}
-				</label>
-				<select className={styles.input} id='gender'>
+				<Label labelFor='name'>Nombre:</Label>
+				<Input className={styles.input} type='text' id='name' />
+				<Label labelFor='surname'>Apellido:</Label>
+				<Input className={styles.input} type='text' id='surname' />
+				<Label labelFor='idnumber'>Cédula:</Label>
+				<Input className={styles.input} type='number' id='idnumber' />
+				<Label labelFor='birthdate'>Fecha de nacimiento:</Label>
+				<Input className={styles.input} type='date' id='birthdate' />
+				<Label labelFor='gender'>Sexo:</Label>
+				<select className={styles.input} id='gender' required>
 					<option value='masculino'>Masculino</option>
 					<option value='femenino'>Femenino</option>
 				</select>
-				<label className={styles.label} htmlFor='address'>
-					Dirección:{' '}
-				</label>
+				<Label labelFor='address'>Dirección:</Label>
 				<textarea
+					required
 					className={styles.input}
-					name='address'
+					id='address'
 					placeholder='Dirección'
 				></textarea>
-				<label className={styles.label} htmlFor='score'>
-					Nota definitiva:{' '}
-				</label>
-				<input
+				<Label labelFor='score'>Nota definitiva:</Label>
+				<Input
 					className={styles.input}
 					type='number'
 					id='score'
 					min={1}
 					max={20}
 				/>
-				<button className={styles.button}>Menú Principal</button>
-				<button type='submit' className={styles.button}>
-					Cargar Estudiante
-				</button>
+				<Button>Cargar Estudiante</Button>
 			</form>
-		</main>
+			<Button>Menú Principal</Button>
+		</Card>
 	);
 };
 
