@@ -1,7 +1,14 @@
 import styles from './Input.module.scss';
 
 const Input = props => (
-	<input required className={styles.input} type={props.type} id={props.id} />
+	<input
+		onChange={props.onChange}
+		required
+		className={styles.input}
+		type={props.type}
+		id={props.id}
+		name={props.name}
+	/>
 );
 
 export default Input;

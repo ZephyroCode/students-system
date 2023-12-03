@@ -14,3 +14,11 @@ textarea {
 	display: block;
 	color: $textColor;
 }
+
+.text {
+	color: darken($celeste, $amount: 35);
+}
+
+.data {
+	color: $celeste;
+}

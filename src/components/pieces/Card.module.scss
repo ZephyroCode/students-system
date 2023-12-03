@@ -1,6 +1,7 @@
 @import '../../styles/abstracts/variables.scss';
 
 .card {
+	max-width: 90vw;
 	padding: 1rem;
 	text-align: center;
 	background-color: lighten($black, $amount: 10);
