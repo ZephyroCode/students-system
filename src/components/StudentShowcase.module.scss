@@ -1,0 +1,9 @@
+@import '../styles/abstracts/variables.scss';
+
+.text {
+	color: darken($celeste, $amount: 35);
+}
+
+.data {
+	color: $celeste;
+}

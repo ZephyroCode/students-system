@@ -1,3 +1,5 @@
+import { useContext, useState } from 'react';
+import { Context } from '../../context/Context';
 import Card from '../pieces/Card';
 import CardTitle from '../pieces/CardTitle';
 import styles from './ModifyScore.module.scss';
@@ -5,22 +7,35 @@ import Label from '../pieces/Label';
 import Button from '../pieces/Button';
 
 const ModifyScore = () => {
+	const [newScore, setNewScore] = useState('');
+
+	const { changeCard, studentFound } = useContext(Context);
+
+	const handleSubmit = e => {
+		e.preventDefault();
+		studentFound.setScore = newScore;
+		changeCard('ModifySuccess');
+	};
+
 	return (
 		<Card>
 			<CardTitle>Modificar Nota Definitiva</CardTitle>
-			<form>
+			<form onSubmit={handleSubmit}>
 				<Label labelFor='newscore'>Ingrese la nueva nota definitiva:</Label>
 				<input
+					onChange={e => setNewScore(e.target.value)}
 					className={styles.input}
 					type='number'
 					id='newscore'
 					min={1}
 					max={20}
 				/>
-				<Button>Actualizar Nota Definitiva</Button>
+				<Button type='submit'>Actualizar Nota Definitiva</Button>
 			</form>
-			<Button>Seleccionar Otra Opción</Button>
-			<Button>Menú Principal</Button>
+			<Button onClick={() => changeCard('ModifyStudent')}>
+				Seleccionar Otra Opción
+			</Button>
+			<Button onClick={() => changeCard('MainMenu')}>Menú Principal</Button>
 		</Card>
 	);
 };

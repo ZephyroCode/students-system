@@ -1,4 +1,4 @@
-import { useState, useContext } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import { Context } from '../context/Context';
 import Card from './pieces/Card';
 import CardTitle from './pieces/CardTitle';
@@ -13,14 +13,20 @@ const AddStudent = () => {
 	const [surname, setSurname] = useState('');
 	const [idNumber, setIdNumber] = useState(0);
 	const [birthdate, setBirthdate] = useState('');
-	const [gender, setGender] = useState('');
+	const [gender, setGender] = useState('Masculino');
 	const [address, setAddress] = useState('');
-	const [score, setScore] = useState(0);
+	const [score, setScore] = useState(1);
 
-	const { changeCard } = useContext(Context);
+	const { changeCard, studentFound, setStudentFound } = useContext(Context);
 
-	const handleSubmit = e => {
-		e.preventDefault();
+	useEffect(() => {
+		const studentToFind = students.find(
+			student => student.idNumber === idNumber
+		);
+		setStudentFound(studentToFind);
+	}, [idNumber]);
+
+	const createAndPushStudent = () => {
 		const newStudent = new Student(
 			name,
 			surname,
@@ -32,6 +38,11 @@ const AddStudent = () => {
 		);
 		students.push(newStudent);
 		changeCard('AddSuccess');
+	};
+
+	const handleSubmit = e => {
+		e.preventDefault();
+		studentFound ? changeCard('StudentAlreadyExists') : createAndPushStudent();
 	};
 
 	return (
@@ -78,8 +89,8 @@ const AddStudent = () => {
 					name='gender'
 					required
 				>
-					<option value='masculino'>Masculino</option>
-					<option value='femenino'>Femenino</option>
+					<option value='Masculino'>Masculino</option>
+					<option value='Femenino'>Femenino</option>
 				</select>
 				<Label labelFor='address'>Dirección:</Label>
 				<textarea

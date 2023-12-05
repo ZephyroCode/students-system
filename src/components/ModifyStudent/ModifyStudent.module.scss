@@ -1,5 +1,13 @@
 @import '../../styles/abstracts/variables.scss';
 
+.text {
+	color: darken($celeste, $amount: 35);
+}
+
+.id {
+	color: $celeste;
+}
+
 .note {
 	font-size: 0.7rem;
 	color: $pink;

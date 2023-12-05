@@ -1,11 +1,8 @@
-import { useContext } from 'react';
-import { Context } from '../context/Context';
 import Card from './pieces/Card';
 import CardTitle from './pieces/CardTitle';
-import Button from './pieces/Button';
-import styles from './StudentCard.module.scss';
+import styles from './StudentShowcase.module.scss';
 
-const StudentCard = ({
+const StudentShowcase = ({
 	name,
 	surname,
 	idNumber,
@@ -14,8 +11,6 @@ const StudentCard = ({
 	address,
 	score,
 }) => {
-	const { changeCard } = useContext(Context);
-
 	return (
 		<Card>
 			<CardTitle>Datos de Estudiante</CardTitle>
@@ -57,9 +52,8 @@ const StudentCard = ({
 					</p>
 				</li>
 			</ul>
-			<Button onClick={() => changeCard('MainMenu')}>Menú Principal</Button>
 		</Card>
 	);
 };
 
-export default StudentCard;
+export default StudentShowcase;

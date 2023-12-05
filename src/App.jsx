@@ -16,8 +16,12 @@ import ConfirmDelete from './components/DeleteStudent/ConfirmDelete';
 import DeleteSuccess from './components/DeleteStudent/DeleteSuccess';
 import AddSuccess from './components/AddSuccess';
 import StudentNotFound from './components/StudentNotFound';
-import styles from './styles/App.module.scss';
 import StudentCard from './components/StudentCard';
+import ShowStudents from './components/ShowStudents';
+import ModifySuccess from './components/ModifyStudent/ModifySuccess';
+import NoStudents from './components/NoStudents';
+import styles from './styles/App.module.scss';
+import StudentAlreadyExists from './components/StudentAlreadyExists';
 
 const App = () => {
 	const { card, studentFound } = useContext(Context);
@@ -44,19 +48,39 @@ const App = () => {
 				{card === 'StudentNotFound' ? <StudentNotFound /> : null}
 				{card === 'StudentCard' && studentFound ? (
 					<StudentCard
-						name={studentFound.name}
-						surname={studentFound.surname}
-						idNumber={studentFound.idNumber}
-						birthdate={studentFound.birthdate}
-						gender={studentFound.gender}
-						address={studentFound.address}
-						score={studentFound.score}
+						name={studentFound.getName}
+						surname={studentFound.getSurname}
+						idNumber={studentFound.getIdNumber}
+						birthdate={studentFound.getBirthdate}
+						gender={studentFound.getGender}
+						address={studentFound.getAddress}
+						score={studentFound.getScore}
 					/>
 				) : null}
+				{card === 'ModifySuccess' ? <ModifySuccess /> : null}
+				{card === 'ShowStudents' ? <ShowStudents /> : null}
+				{card === 'NoStudents' ? <NoStudents /> : null}
+				{card === 'StudentAlreadyExists' ? <StudentAlreadyExists /> : null}
 			</>
-			<p className={styles.text}>
-				Hecho por Wilver &quot;Zephyro&quot; Salazar
-			</p>
+			<div className={styles.textBox}>
+				<p className={styles.text}>
+					Hecho por Wilver &quot;Zephyro&quot; Salazar
+				</p>
+				<p className={styles.text}>
+					¡Visita mi GitHub haciendo click{' '}
+					<strong>
+						<a
+							className={styles.link}
+							href='http://github.com/ZephyroCode'
+							target='_blank'
+							rel='noopener noreferrer'
+						>
+							aquí
+						</a>
+					</strong>
+					!
+				</p>
+			</div>
 		</>
 	);
 };

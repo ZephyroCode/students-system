@@ -1,0 +1,9 @@
+@import '../../styles/abstracts/variables.scss';
+
+.showcaseCard {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-wrap: wrap;
+	gap: 1.5em;
+}

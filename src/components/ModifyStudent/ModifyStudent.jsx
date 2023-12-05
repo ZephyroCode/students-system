@@ -1,3 +1,5 @@
+import { useContext } from 'react';
+import { Context } from '../../context/Context';
 import Button from '../pieces/Button';
 import Card from '../pieces/Card';
 import CardTitle from '../pieces/CardTitle';
@@ -5,33 +7,51 @@ import MenuOption from '../pieces/MenuOption';
 import styles from './ModifyStudent.module.scss';
 
 const ModifyStudent = () => {
+	const { changeCard, studentFound } = useContext(Context);
+
 	return (
 		<Card>
 			<CardTitle>Modificar Estudiante</CardTitle>
+			<p className={styles.text}>
+				Cédula seleccionada:{' '}
+				<span className={styles.id}>{studentFound.getIdNumber}</span>
+			</p>
 			<ul>
 				<li>
-					<MenuOption>Modificar Nombre</MenuOption>
+					<MenuOption onClick={() => changeCard('ModifyName')}>
+						Modificar Nombre
+					</MenuOption>
 				</li>
 				<li>
-					<MenuOption>Modificar Apellido</MenuOption>
+					<MenuOption onClick={() => changeCard('ModifySurname')}>
+						Modificar Apellido
+					</MenuOption>
 				</li>
 				<li>
-					<MenuOption>Modificar Fecha de Nacimiento</MenuOption>
+					<MenuOption onClick={() => changeCard('ModifyBirthDate')}>
+						Modificar Fecha de Nacimiento
+					</MenuOption>
 				</li>
 				<li>
-					<MenuOption>Modificar Sexo</MenuOption>
+					<MenuOption onClick={() => changeCard('ModifyGender')}>
+						Modificar Sexo
+					</MenuOption>
 				</li>
 				<li>
-					<MenuOption>Modificar Dirección</MenuOption>
+					<MenuOption onClick={() => changeCard('ModifyAddress')}>
+						Modificar Dirección
+					</MenuOption>
 				</li>
 				<li>
-					<MenuOption>Modificar Nota Definitiva</MenuOption>
+					<MenuOption onClick={() => changeCard('ModifyScore')}>
+						Modificar Nota Definitiva
+					</MenuOption>
 				</li>
 			</ul>
 			<span className={styles.note}>
 				<em>Nota: La cédula de un estudiante no puede ser modificada.</em>
 			</span>
-			<Button>Menú Principal</Button>
+			<Button onClick={() => changeCard('MainMenu')}>Menú Principal</Button>
 		</Card>
 	);
 };

@@ -34,7 +34,15 @@ const MainMenu = () => {
 					</MenuOption>
 				</li>
 				<li>
-					<MenuOption>Mostrar Estudiantes</MenuOption>
+					<MenuOption
+						onClick={() => {
+							students.length > 0
+								? changeCard('ShowStudents')
+								: changeCard('NoStudents');
+						}}
+					>
+						Mostrar Estudiantes
+					</MenuOption>
 				</li>
 			</ul>
 			<p className={styles.text}>
