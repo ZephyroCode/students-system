@@ -5,7 +5,7 @@ import Card from './pieces/Card';
 import CardTitle from './pieces/CardTitle';
 import { students } from '../data/students';
 import StudentShowcase from './StudentShowcase';
-import ShowcaseCard from './pieces/ShowCaseCard';
+import ShowcaseCard from './pieces/ShowcaseCard';
 
 const ShowStudents = props => {
 	const { changeCard } = useContext(Context);
