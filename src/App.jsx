@@ -1,7 +1,8 @@
 import { useContext } from 'react';
 import { Context } from './context/Context';
+import { useSEO } from './hooks/useSEO';
 import MainMenu from './components/MainMenu';
-import AddStudent from './components/AddStudent';
+import AddStudent from './components/AddStudent/AddStudent';
 import SearchStudent from './components/SearchStudent';
 import ModifyStudent from './components/ModifyStudent/ModifyStudent';
 import ModifyName from './components/ModifyStudent/ModifyName';
@@ -14,17 +15,23 @@ import SearchBeforeModify from './components/ModifyStudent/SearchBeforeModify';
 import SearchBeforeDelete from './components/DeleteStudent/SearchBeforeDelete';
 import ConfirmDelete from './components/DeleteStudent/ConfirmDelete';
 import DeleteSuccess from './components/DeleteStudent/DeleteSuccess';
-import AddSuccess from './components/AddSuccess';
+import AddSuccess from './components/AddStudent/AddSuccess';
 import StudentNotFound from './components/StudentNotFound';
 import StudentCard from './components/StudentCard';
 import ShowStudents from './components/ShowStudents';
 import ModifySuccess from './components/ModifyStudent/ModifySuccess';
 import NoStudents from './components/NoStudents';
+import StudentAlreadyExists from './components/AddStudent/StudentAlreadyExists';
 import styles from './styles/App.module.scss';
-import StudentAlreadyExists from './components/StudentAlreadyExists';
+import InvalidBirthDate from './components/AddStudent/InvalidBirthDate';
+import InvalidIdNumber from './components/AddStudent/InvalidIdNumber';
 
 const App = () => {
 	const { card, studentFound } = useContext(Context);
+	useSEO({
+		title: 'ZephyroCode | Students System',
+		description: `Students System App made with ReactJS by ZephyroCode`,
+	});
 
 	return (
 		<>
@@ -48,19 +55,21 @@ const App = () => {
 				{card === 'StudentNotFound' ? <StudentNotFound /> : null}
 				{card === 'StudentCard' && studentFound ? (
 					<StudentCard
-						name={studentFound.getName}
-						surname={studentFound.getSurname}
-						idNumber={studentFound.getIdNumber}
-						birthdate={studentFound.getBirthdate}
-						gender={studentFound.getGender}
-						address={studentFound.getAddress}
-						score={studentFound.getScore}
+						name={studentFound.name}
+						surname={studentFound.surname}
+						idNumber={studentFound.idNumber}
+						birthdate={studentFound.birthdate}
+						gender={studentFound.gender}
+						address={studentFound.address}
+						score={studentFound.score}
 					/>
 				) : null}
 				{card === 'ModifySuccess' ? <ModifySuccess /> : null}
 				{card === 'ShowStudents' ? <ShowStudents /> : null}
 				{card === 'NoStudents' ? <NoStudents /> : null}
 				{card === 'StudentAlreadyExists' ? <StudentAlreadyExists /> : null}
+				{card === 'InvalidBirthDate' ? <InvalidBirthDate /> : null}
+				{card === 'InvalidIdNumber' ? <InvalidIdNumber /> : null}
 			</>
 			<div className={styles.textBox}>
 				<p className={styles.text}>

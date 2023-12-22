@@ -14,7 +14,7 @@ const ModifyStudent = () => {
 			<CardTitle>Modificar Estudiante</CardTitle>
 			<p className={styles.text}>
 				Cédula seleccionada:{' '}
-				<span className={styles.id}>{studentFound.getIdNumber}</span>
+				<span className={styles.id}>{studentFound.idNumber}</span>
 			</p>
 			<ul>
 				<li>

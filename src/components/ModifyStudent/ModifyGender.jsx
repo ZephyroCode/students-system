@@ -9,11 +9,14 @@ import styles from './ModifyGender.module.scss';
 const ModifyGender = () => {
 	const [newGender, setNewGender] = useState('');
 
-	const { changeCard, studentFound } = useContext(Context);
+	const { student, setStudent, changeCard, studentFound, updateStudent } =
+		useContext(Context);
 
 	const handleSubmit = e => {
 		e.preventDefault();
-		studentFound.setGender = newGender;
+		setStudent(studentFound);
+		student.gender = newGender;
+		updateStudent(studentFound.idNumber, student);
 		changeCard('ModifySuccess');
 	};
 

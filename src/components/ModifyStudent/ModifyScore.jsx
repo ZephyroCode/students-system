@@ -9,11 +9,14 @@ import Button from '../pieces/Button';
 const ModifyScore = () => {
 	const [newScore, setNewScore] = useState('');
 
-	const { changeCard, studentFound } = useContext(Context);
+	const { student, setStudent, changeCard, studentFound, updateStudent } =
+		useContext(Context);
 
 	const handleSubmit = e => {
 		e.preventDefault();
-		studentFound.setScore = newScore;
+		setStudent(studentFound);
+		student.score = newScore;
+		updateStudent(studentFound.idNumber, student);
 		changeCard('ModifySuccess');
 	};
 

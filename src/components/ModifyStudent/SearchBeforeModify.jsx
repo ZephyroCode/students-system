@@ -1,16 +1,22 @@
 import { useState, useEffect, useContext } from 'react';
 import { Context } from '../../context/Context';
-import { students } from '../../data/students';
 import Button from '../pieces/Button';
 import Card from '../pieces/Card';
 import CardTitle from '../pieces/CardTitle';
 import Label from '../pieces/Label';
 import styles from './SearchBeforeModify.module.scss';
+import { useSEO } from '../../hooks/useSEO';
 
 const SearchBeforeModify = () => {
 	const [idNumber, setIdNumber] = useState(0);
 
-	const { changeCard, studentFound, setStudentFound } = useContext(Context);
+	const { students, changeCard, studentFound, setStudentFound } =
+		useContext(Context);
+
+	useSEO({
+		title: 'ZephyroCode | Modify Student',
+		description: `Students System App made with ReactJS by ZephyroCode`,
+	});
 
 	useEffect(() => {
 		const studentToFind = students.find(

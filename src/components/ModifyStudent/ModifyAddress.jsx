@@ -9,11 +9,14 @@ import Button from '../pieces/Button';
 const ModifyAddress = () => {
 	const [newAddress, setNewAddress] = useState('');
 
-	const { changeCard, studentFound } = useContext(Context);
+	const { student, setStudent, changeCard, studentFound, updateStudent } =
+		useContext(Context);
 
 	const handleSubmit = e => {
 		e.preventDefault();
-		studentFound.setAddress = newAddress;
+		setStudent(studentFound);
+		student.address = newAddress;
+		updateStudent(studentFound.idNumber, student);
 		changeCard('ModifySuccess');
 	};
 

@@ -1,12 +1,13 @@
 import { useState, useContext, useEffect } from 'react';
-import { Context } from '../context/Context';
-import Card from './pieces/Card';
-import CardTitle from './pieces/CardTitle';
+import { Context } from '../../context/Context';
+import Card from '../pieces/Card';
+import CardTitle from '../pieces/CardTitle';
 import styles from './AddStudent.module.scss';
-import Button from './pieces/Button';
-import Label from './pieces/Label';
-import Input from './pieces/Input';
-import { Student, students } from '../data/students';
+import Button from '../pieces/Button';
+import Label from '../pieces/Label';
+import Input from '../pieces/Input';
+import { Student } from '../../data/students';
+import { useSEO } from '../../hooks/useSEO';
 
 const AddStudent = () => {
 	const [name, setName] = useState('');
@@ -17,7 +18,13 @@ const AddStudent = () => {
 	const [address, setAddress] = useState('');
 	const [score, setScore] = useState(1);
 
-	const { changeCard, studentFound, setStudentFound } = useContext(Context);
+	const { students, setStudents, changeCard, studentFound, setStudentFound } =
+		useContext(Context);
+
+	useSEO({
+		title: 'ZephyroCode | Add Student',
+		description: `Students System App made with ReactJS by ZephyroCode`,
+	});
 
 	useEffect(() => {
 		const studentToFind = students.find(
@@ -26,7 +33,7 @@ const AddStudent = () => {
 		setStudentFound(studentToFind);
 	}, [idNumber]);
 
-	const createAndPushStudent = () => {
+	const createAndAddStudent = () => {
 		const newStudent = new Student(
 			name,
 			surname,
@@ -36,13 +43,19 @@ const AddStudent = () => {
 			address,
 			score
 		);
-		students.push(newStudent);
-		changeCard('AddSuccess');
+		if (Date.parse(birthdate) >= Date.now()) {
+			changeCard('InvalidBirthDate');
+		} else if (idNumber.length < 7) {
+			changeCard('InvalidIdNumber');
+		} else {
+			setStudents([...students, newStudent]);
+			changeCard('AddSuccess');
+		}
 	};
 
 	const handleSubmit = e => {
 		e.preventDefault();
-		studentFound ? changeCard('StudentAlreadyExists') : createAndPushStudent();
+		studentFound ? changeCard('StudentAlreadyExists') : createAndAddStudent();
 	};
 
 	return (
@@ -56,6 +69,7 @@ const AddStudent = () => {
 					type='text'
 					id='name'
 					name='name'
+					value={name}
 				/>
 				<Label labelFor='surname'>Apellido:</Label>
 				<Input
@@ -64,14 +78,18 @@ const AddStudent = () => {
 					type='text'
 					id='surname'
 					name='surname'
+					value={surname}
 				/>
 				<Label labelFor='idnumber'>Cédula:</Label>
-				<Input
+				<input
 					onChange={e => setIdNumber(e.target.value)}
 					className={styles.input}
 					type='number'
 					id='idnumber'
 					name='idnumber'
+					value={idNumber}
+					min={1}
+					max={99999999}
 				/>
 				<Label labelFor='birthdate'>Fecha de nacimiento:</Label>
 				<Input
@@ -80,6 +98,7 @@ const AddStudent = () => {
 					type='date'
 					id='birthdate'
 					name='birthdate'
+					value={birthdate}
 				/>
 				<Label labelFor='gender'>Sexo:</Label>
 				<select
@@ -88,6 +107,7 @@ const AddStudent = () => {
 					id='gender'
 					name='gender'
 					required
+					value={gender}
 				>
 					<option value='Masculino'>Masculino</option>
 					<option value='Femenino'>Femenino</option>
@@ -100,6 +120,7 @@ const AddStudent = () => {
 					className={styles.input}
 					id='address'
 					placeholder='Dirección'
+					value={address}
 				></textarea>
 				<Label labelFor='score'>Nota definitiva:</Label>
 				<input
@@ -110,6 +131,7 @@ const AddStudent = () => {
 					name='score'
 					min={1}
 					max={20}
+					value={score}
 				/>
 				<Button type='submit'>Cargar Estudiante</Button>
 				<p className={styles.text}>

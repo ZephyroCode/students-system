@@ -3,29 +3,23 @@ import { Context } from '../context/Context';
 import Button from './pieces/Button';
 import Card from './pieces/Card';
 import CardTitle from './pieces/CardTitle';
-import { students } from '../data/students';
 import StudentShowcase from './StudentShowcase';
 import ShowcaseCard from './pieces/ShowcaseCard';
+import { useSEO } from '../hooks/useSEO';
 
-const ShowStudents = props => {
+const ShowStudents = () => {
 	const { changeCard } = useContext(Context);
+
+	useSEO({
+		title: 'ZephyroCode | Show Students',
+		description: `Students System App made with ReactJS by ZephyroCode`,
+	});
 
 	return (
 		<Card>
 			<CardTitle>Estudiantes Registrados</CardTitle>
 			<ShowcaseCard>
-				{students.map((student, i) => (
-					<StudentShowcase
-						key={i}
-						name={student.getName}
-						surname={student.getSurname}
-						idNumber={student.getIdNumber}
-						birthdate={student.getBirthdate}
-						gender={student.getGender}
-						address={student.getAddress}
-						score={student.getScore}
-					/>
-				))}
+				<StudentShowcase />
 			</ShowcaseCard>
 			<Button onClick={() => changeCard('MainMenu')}>Menú Principal</Button>
 		</Card>

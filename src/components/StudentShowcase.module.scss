@@ -1,9 +1,33 @@
 @import '../styles/abstracts/variables.scss';
 
-.text {
+.table {
+	padding: 0.5em 1em 0.5em;
+	border-collapse: separate;
+	border: 2px solid $blue;
+	border-radius: $borderRadius;
+}
+
+.th {
+	width: 7em;
+	padding-bottom: 0.5em;
+	margin-bottom: 1em;
+	color: darken($celeste, $amount: 35);
+	border-bottom: 1px solid $blue;
+}
+
+.td {
+	padding: 0.5em 0;
+	text-align: center;
+	height: 2em;
+	color: $celeste;
+	border-bottom: 1px solid $blue;
+}
+
+.tfoot {
+	padding-top: 0.5em;
 	color: darken($celeste, $amount: 35);
 }
 
-.data {
-	color: $celeste;
+.text {
+	color: $purple;
 }

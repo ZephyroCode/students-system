@@ -1,6 +1,5 @@
 import { useContext } from 'react';
 import { Context } from '../../context/Context';
-import { students } from '../../data/students';
 import Button from '../pieces/Button';
 import Card from '../pieces/Card';
 import CardTitle from '../pieces/CardTitle';
@@ -8,11 +7,13 @@ import OptionButton from '../pieces/OptionButton';
 import styles from './ConfirmDelete.module.scss';
 
 const ConfirmDelete = () => {
-	const { changeCard, studentFound } = useContext(Context);
+	const { students, setStudents, changeCard, studentFound } =
+		useContext(Context);
 
 	const handleDelete = () => {
-		const studentToDelete = students.indexOf(studentFound);
-		students.splice(studentToDelete, 1);
+		setStudents(
+			students.filter(student => student.idNumber !== studentFound.idNumber)
+		);
 		changeCard('DeleteSuccess');
 	};
 
@@ -22,7 +23,7 @@ const ConfirmDelete = () => {
 			<p className={styles.text}>¿Seguro que desea eliminar al estudiante?</p>
 			<p className={styles.idText}>
 				Cédula seleccionada:{' '}
-				<span className={styles.id}>{studentFound.getIdNumber}</span>
+				<span className={styles.id}>{studentFound.idNumber}</span>
 			</p>
 			<OptionButton onClick={() => changeCard('SearchBeforeDelete')}>
 				Cancelar

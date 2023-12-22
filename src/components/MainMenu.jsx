@@ -1,13 +1,16 @@
 import { useContext } from 'react';
 import { Context } from '../context/Context';
+import { useSEO } from '../hooks/useSEO';
 import Card from './pieces/Card';
 import CardTitle from './pieces/CardTitle';
 import MenuOption from './pieces/MenuOption';
-import { students } from '../data/students';
 import styles from './MainMenu.module.scss';
 
 const MainMenu = () => {
-	const { changeCard } = useContext(Context);
+	const { changeCard, students } = useContext(Context);
+	useSEO({
+		title: 'ZephyroCode | Students System',
+	});
 
 	return (
 		<Card>

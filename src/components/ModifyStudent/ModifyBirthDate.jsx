@@ -9,11 +9,14 @@ import Button from '../pieces/Button';
 const ModifyBirthDate = () => {
 	const [newBirthdate, setNewBirthdate] = useState('');
 
-	const { changeCard, studentFound } = useContext(Context);
+	const { student, setStudent, changeCard, studentFound, updateStudent } =
+		useContext(Context);
 
 	const handleSubmit = e => {
 		e.preventDefault();
-		studentFound.setBirthdate = newBirthdate;
+		setStudent(studentFound);
+		student.birthdate = newBirthdate;
+		updateStudent(studentFound.idNumber, student);
 		changeCard('ModifySuccess');
 	};
 

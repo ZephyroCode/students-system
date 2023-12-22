@@ -9,11 +9,14 @@ import Button from '../pieces/Button';
 const ModifySurname = () => {
 	const [newSurname, setNewSurname] = useState('');
 
-	const { changeCard, studentFound } = useContext(Context);
+	const { student, setStudent, changeCard, studentFound, updateStudent } =
+		useContext(Context);
 
 	const handleSubmit = e => {
 		e.preventDefault();
-		studentFound.setSurname = newSurname;
+		setStudent(studentFound);
+		student.surname = newSurname;
+		updateStudent(studentFound.idNumber, student);
 		changeCard('ModifySuccess');
 	};
 
