@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { Context } from '../../context/Context';
 import Card from '../pieces/Card';
 import CardTitle from '../pieces/CardTitle';
@@ -7,16 +7,19 @@ import Button from '../pieces/Button';
 import styles from './ModifyGender.module.scss';
 
 const ModifyGender = () => {
-	const [newGender, setNewGender] = useState('');
+	const [newGender, setNewGender] = useState('Masculino');
 
 	const { student, setStudent, changeCard, studentFound, updateStudent } =
 		useContext(Context);
 
-	const handleSubmit = e => {
-		e.preventDefault();
+	useEffect(() => {
 		setStudent(studentFound);
 		student.gender = newGender;
-		updateStudent(studentFound.idNumber, student);
+	}, [newGender]);
+
+	const handleSubmit = e => {
+		e.preventDefault();
+		updateStudent(student.idNumber, student);
 		changeCard('ModifySuccess');
 	};
 
@@ -30,6 +33,7 @@ const ModifyGender = () => {
 					className={styles.input}
 					id='newgender'
 					required
+					value={newGender}
 				>
 					<option value='Masculino'>Masculino</option>
 					<option value='Femenino'>Femenino</option>

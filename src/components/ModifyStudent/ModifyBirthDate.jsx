@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { Context } from '../../context/Context';
 import Card from '../pieces/Card';
 import CardTitle from '../pieces/CardTitle';
@@ -12,11 +12,14 @@ const ModifyBirthDate = () => {
 	const { student, setStudent, changeCard, studentFound, updateStudent } =
 		useContext(Context);
 
-	const handleSubmit = e => {
-		e.preventDefault();
+	useEffect(() => {
 		setStudent(studentFound);
 		student.birthdate = newBirthdate;
-		updateStudent(studentFound.idNumber, student);
+	}, [newBirthdate]);
+
+	const handleSubmit = e => {
+		e.preventDefault();
+		updateStudent(student.idNumber, student);
 		changeCard('ModifySuccess');
 	};
 
@@ -31,6 +34,7 @@ const ModifyBirthDate = () => {
 					onChange={e => setNewBirthdate(e.target.value)}
 					type='date'
 					id='newbirthdate'
+					value={newBirthdate}
 				/>
 				<Button type='submit'>Actualizar Fecha de Nacimiento</Button>
 			</form>

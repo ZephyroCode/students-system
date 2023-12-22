@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { Context } from '../../context/Context';
 import Card from '../pieces/Card';
 import CardTitle from '../pieces/CardTitle';
@@ -12,11 +12,14 @@ const ModifyAddress = () => {
 	const { student, setStudent, changeCard, studentFound, updateStudent } =
 		useContext(Context);
 
-	const handleSubmit = e => {
-		e.preventDefault();
+	useEffect(() => {
 		setStudent(studentFound);
 		student.address = newAddress;
-		updateStudent(studentFound.idNumber, student);
+	}, [newAddress]);
+
+	const handleSubmit = e => {
+		e.preventDefault();
+		updateStudent(student.idNumber, student);
 		changeCard('ModifySuccess');
 	};
 
@@ -31,6 +34,7 @@ const ModifyAddress = () => {
 					className={styles.input}
 					id='newaddress'
 					placeholder='Nueva Dirección'
+					value={newAddress}
 				></textarea>
 				<Button>Actualizar Dirección</Button>
 			</form>

@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react';
+import { useContext, useState, useEffect } from 'react';
 import { Context } from '../../context/Context';
 import Card from '../pieces/Card';
 import CardTitle from '../pieces/CardTitle';
@@ -12,11 +12,14 @@ const ModifyName = () => {
 	const { student, setStudent, changeCard, studentFound, updateStudent } =
 		useContext(Context);
 
-	const handleSubmit = e => {
-		e.preventDefault();
+	useEffect(() => {
 		setStudent(studentFound);
 		student.name = newName;
-		updateStudent(studentFound.idNumber, student);
+	}, [newName]);
+
+	const handleSubmit = e => {
+		e.preventDefault();
+		updateStudent(student.idNumber, student);
 		changeCard('ModifySuccess');
 	};
 
@@ -29,6 +32,7 @@ const ModifyName = () => {
 					onChange={e => setNewName(e.target.value)}
 					type='text'
 					id='newname'
+					value={newName}
 				/>
 				<Button types='submit'>Actualizar Nombre</Button>
 			</form>

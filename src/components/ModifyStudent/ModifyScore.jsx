@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { Context } from '../../context/Context';
 import Card from '../pieces/Card';
 import CardTitle from '../pieces/CardTitle';
@@ -12,11 +12,14 @@ const ModifyScore = () => {
 	const { student, setStudent, changeCard, studentFound, updateStudent } =
 		useContext(Context);
 
-	const handleSubmit = e => {
-		e.preventDefault();
+	useEffect(() => {
 		setStudent(studentFound);
 		student.score = newScore;
-		updateStudent(studentFound.idNumber, student);
+	}, [newScore]);
+
+	const handleSubmit = e => {
+		e.preventDefault();
+		updateStudent(student.idNumber, student);
 		changeCard('ModifySuccess');
 	};
 
@@ -32,6 +35,7 @@ const ModifyScore = () => {
 					id='newscore'
 					min={1}
 					max={20}
+					value={newScore}
 				/>
 				<Button type='submit'>Actualizar Nota Definitiva</Button>
 			</form>
